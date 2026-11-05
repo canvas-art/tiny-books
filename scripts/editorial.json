@@ -1,0 +1,126 @@
+{
+  "book": {
+    "slug": "meditations",
+    "title": "Meditations",
+    "author": "Marcus Aurelius",
+    "translator": "Meric Casaubon",
+    "source": "Project Gutenberg eBook #2680",
+    "year": "c. 170–180 AD",
+    "blurb": "The private notebook of a Roman emperor, written to himself on campaign. Short, sharp reminders on how to live well, act justly and meet whatever comes with a steady mind.",
+    "cover": "#1e2a4a"
+  },
+  "chapters": [
+    { "title": "Debts of Gratitude", "theme": "What Marcus learned from family, teachers and friends." },
+    { "title": "Time Is Short", "theme": "Put off nothing. Act as if each action were your last." },
+    { "title": "The Guiding Spirit", "theme": "Guard the inner part of you that reasons and chooses." },
+    { "title": "The Inner Retreat", "theme": "You can always withdraw into yourself and find calm." },
+    { "title": "Rising to Work", "theme": "You were made to do the work of a human being." },
+    { "title": "One Fabric", "theme": "All things are woven together. Do your part in the whole." },
+    { "title": "The Wrestler's Art", "theme": "Living is closer to wrestling than to dancing." },
+    { "title": "The Unconquerable Mind", "theme": "A mind free of passion is a fortress." },
+    { "title": "Injustice Is Impiety", "theme": "We were made for one another. Wronging others wrongs nature." },
+    { "title": "Good, Modest, True", "theme": "Live up to the names you have given yourself." },
+    { "title": "The Branch and the Tree", "theme": "Stay joined to the community you grew from." },
+    { "title": "The Final Act", "theme": "Three acts can be the whole play. Leave the stage well pleased." }
+  ],
+  "micro_titles": [
+    ["Gentle Grandfathers", "Liberty from Apollonius", "Friends, Brothers, Mentors", "Portrait of My Father", "Gifts from the Gods", "At Granua, Betimes in the Morning"],
+    ["How Long Thou Hast Put It Off", "Every Action as Thy Last", "Three Thousand Years", "All Is Opinion"],
+    ["Life Wastes Daily", "Not Other Men's Business", "Better Than Righteousness?", "The Disciplined Mind", "What Is This Fancy Made Of?", "Instruments Always at Hand"],
+    ["The Retreat Within", "One Common City", "Death Hangs Over Thee", "Meddle Not with Many Things", "A Good Man's Life", "The Times of Vespasian", "Ready to Die", "Heraclitus and the Physicians", "Like a Promontory"],
+    ["Unwilling to Rise", "The Vine and Its Grapes", "Nature's Prescription", "Be Not Disheartened", "Form and Matter", "The Mind Takes the Colour of Its Thoughts", "What Hurts Not the City", "Living with the Gods", "Ashes or a Skeleton"],
+    ["Tractable Matter", "Seeing Things Bare", "Nothing Impossible for Thee", "At the Palestra", "A Disciple of Antoninus", "Corners of the World", "All Working to One End", "Good for the Whole", "Listening Well"],
+    ["What Is Wickedness?", "Let Not Things Future Trouble Thee", "Members of One Body", "The Torrent of Substance", "When Others Trespass", "Sayings of the Ancients", "The Better Wrestler", "The Art of True Living", "Neither Intolerable nor Eternal", "Running Out Thy Time"],
+    ["Against Vainglory", "No Time to Read?", "Hard to Wake", "As One Tosses a Ball", "True Joy", "The Severed Hand", "Justice Above All", "Throw Me Where Thou Wilt", "The Bitter Cucumber", "The Sun's Rays"],
+    ["The Unjust Is Impious", "Departing Well", "The Fruits of Reason", "Out of All My Trouble", "Bearing Up Dead Bodies", "Looking Down from Above", "Change Is Not Loss", "Epicurus in Sickness", "Can There Be No Impudent Men?"],
+    ["O My Soul", "Atoms or Nature", "Good, Modest, True", "The Spider and the Fly", "Give and Take Away", "The Earth Longs for Rain", "The Squealing Pig", "Plain and Sincere", "Bitten by the Truth", "Someone Will Be Glad"],
+    ["Properties of a Reasonable Soul", "Ready to Depart", "The Branch Cut Off", "Will Any Despise Me?", "Nine Remedies for Anger", "Country Mouse, City Mouse", "The Pythagorean Morning"],
+    ["Thou Mayest Have It Now", "Loving Ourselves, Fearing Others", "Fate or Providence", "Cast Away Opinion", "One Light of the Sun", "Three Acts Is the Whole Play"]
+  ],
+  "quizzes": [
+    [
+      { "q": "Book One is mostly a list of what?", "options": ["Military victories", "What Marcus learned from the people around him", "Laws he passed as emperor", "His dreams"], "answer": 1, "why": "Book One lists what he owes to family, teachers, friends and the gods." },
+      { "q": "Which teacher first gave Marcus the writings of Epictetus?", "options": ["Fronto", "Apollonius", "Rusticus", "Sextus"], "answer": 2, "why": "Rusticus 'gave me of his own' his copy of Epictetus's moral commentaries." },
+      { "q": "From his grandfather Verus, Marcus learned to be…", "options": ["Gentle and meek, free from anger", "Ambitious and bold", "A skilled orator", "Wealthy and generous"], "answer": 0, "why": "'Of my grandfather Verus I have learned to be gentle and meek, and to refrain from all anger.'" },
+      { "q": "'Betimes in the morning say to thyself…' What should you expect to meet that day?", "options": ["Good fortune", "Idle, ungrateful and difficult people", "Your own death", "Nothing new"], "answer": 1, "why": "He prepares for difficult people and reminds himself they are kin who cannot truly harm him." },
+      { "q": "True or false: Marcus thanks the gods for things he did NOT do, as well as for things he had.", "options": ["True", "False"], "answer": 0, "why": "His thanks to the gods includes the mistakes and temptations he was spared." }
+    ],
+    [
+      { "q": "Book Two opens by reminding Marcus of what?", "options": ["How long he has put off these things", "How rich Rome is", "His father's death", "The size of the universe"], "answer": 0, "why": "'Remember how long thou hast already put off these things…'" },
+      { "q": "How should you go about every action, according to Book Two?", "options": ["Slowly and with doubt", "As if it were your last action", "Only after asking advice", "For the sake of praise"], "answer": 1, "why": "Do each action 'as thy last action, free from all vanity'." },
+      { "q": "If you lived three thousand years, what could you actually lose?", "options": ["Everything you own", "Only the present moment", "Your whole past", "Your reputation"], "answer": 1, "why": "No one can lose the past or the future, only the present he is living now." },
+      { "q": "Complete the line: 'Remember that all is but ___.'", "options": ["vanity", "opinion", "fate", "smoke"], "answer": 1, "why": "'Remember that all is but opinion and conceit.'" },
+      { "q": "Theophrastus judged which sins to be worse?", "options": ["Sins of anger", "Sins of lust and pleasure", "Sins of sloth", "Sins of speech"], "answer": 1, "why": "Sins of desire are worse than sins of anger, which come with pain." }
+    ],
+    [
+      { "q": "Why must we hurry, according to the start of Book Three?", "options": ["Rome is at war", "Our understanding may fail before our body does", "The gods are watching", "Fame fades"], "answer": 1, "why": "Life wastes daily, and the mind may start to dote before death comes." },
+      { "q": "Hippocrates cured many sicknesses and then…", "options": ["Became emperor", "Fell sick himself and died", "Wrote the Meditations", "Retired to the country"], "answer": 1, "why": "Healers, astrologers and conquerors all died in their turn." },
+      { "q": "What does Marcus warn against spending your days thinking about?", "options": ["Death", "Other men's affairs", "The gods", "Your own faults"], "answer": 1, "why": "'Spend not the remnant of thy days in thoughts and fancies concerning other men.'" },
+      { "q": "A physician keeps instruments ready for sudden cases. What should you keep ready?", "options": ["Money", "Your principles (dogmata)", "Friends", "Excuses"], "answer": 1, "why": "Keep your principles at hand for whatever comes, divine or human." },
+      { "q": "True or false: Marcus says anything that makes you break faith or lose your modesty can still be profitable.", "options": ["True", "False"], "answer": 1, "why": "'Never esteem of anything as profitable' that makes you break faith or lose modesty." }
+    ],
+    [
+      { "q": "Where is the best place to retire to for rest?", "options": ["The sea-shore", "The mountains", "Into your own mind", "A country villa"], "answer": 2, "why": "'A man cannot any whither retire better than to his own soul.'" },
+      { "q": "If reason is common to all men, what follows?", "options": ["All men are equal in wealth", "The world is like one city", "Laws are unnecessary", "Death is an evil"], "answer": 1, "why": "Shared reason means shared law, so the world is, in a sense, one city." },
+      { "q": "Thinking of the times of Vespasian, what do you see?", "options": ["A golden age", "The same things as today: marrying, quarrelling, dying", "Only war", "Nothing anyone remembers"], "answer": 1, "why": "Every age repeats the same busy scenes, and all of them pass." },
+      { "q": "Marcus says you should be like a promontory of the sea. Why?", "options": ["Because it is high and proud", "Because it stands firm while the waves break around it", "Because it is lonely", "Because it is beautiful"], "answer": 1, "why": "Stand steady while the waves beat against you, and the water around you settles." },
+      { "q": "Complete the line: 'Let opinion be taken away, and no man will think himself ___.'", "options": ["happy", "wronged", "alone", "rich"], "answer": 1, "why": "Without the opinion 'I am wronged', the hurt disappears." }
+    ],
+    [
+      { "q": "When you are unwilling to rise in the morning, what should you remember?", "options": ["That sleep is healthy", "That you rise to do the work of a man", "That the day will be short", "That others are still sleeping"], "answer": 1, "why": "Ants, bees and spiders do their part. You were made to do the work of a human being." },
+      { "q": "The best kind of giver is compared to what?", "options": ["A river", "A vine that bears grapes and seeks nothing more", "A king", "The sun"], "answer": 1, "why": "Like the vine, he does good and moves on without keeping score." },
+      { "q": "Complete the idea: 'Such as thy thoughts are, such will thy ___ be.'", "options": ["fortune", "mind", "friends", "body"], "answer": 1, "why": "The soul takes its colour from its thoughts." },
+      { "q": "What doesn't hurt the city cannot hurt…", "options": ["The emperor", "Any citizen", "The gods", "The enemy"], "answer": 1, "why": "That rule helps you judge whether you have really been harmed." },
+      { "q": "According to Book Five, who 'lives with the gods'?", "options": ["Priests", "Whoever keeps his soul content with what is given and does what his inner spirit wills", "The wealthy", "The dead"], "answer": 1, "why": "Living with the gods means being content with your lot and following the spirit within you." }
+    ],
+    [
+      { "q": "How does Marcus suggest you see a purple robe or fine food?", "options": ["As a sign of rank", "As what it really is: sheep's wool dyed in shellfish blood, dead fish and birds", "As a gift of the gods", "As a reward for virtue"], "answer": 1, "why": "Strip things bare to see what they are and lose their false glamour." },
+      { "q": "Someone at the palestra scratches you and breaks your head. What then?", "options": ["Never trust him again", "Don't hold it against him or suspect him", "Report him", "Leave the palestra"], "answer": 1, "why": "Treat it as part of the game and, as with life, without grudges." },
+      { "q": "Alexander of Macedon and his mule driver, once dead…", "options": ["Went to different places", "Came to the same end", "Were both remembered", "Became gods"], "answer": 1, "why": "Death made them equal. Both returned to the same source." },
+      { "q": "Marcus wrote: 'As Antoninus, my city is Rome; as a man, my city is…'", "options": ["Athens", "The whole world", "The army", "My family"], "answer": 1, "why": "He belonged to Rome and to the whole community of reasoning beings." },
+      { "q": "True or false: 'If something is hard for you, you should not think it impossible for a human being.'", "options": ["True", "False"], "answer": 0, "why": "If it is possible for a human, it is within your reach too." }
+    ],
+    [
+      { "q": "What should you say to yourself about wickedness?", "options": ["It is new and shocking", "It is what you have already seen many times", "It only exists in Rome", "It comes from the gods"], "answer": 1, "why": "There is nothing new under the sun. Evil is old and familiar." },
+      { "q": "How should you treat things that might happen in the future?", "options": ["Worry now to be ready", "Don't let them trouble you; you'll meet them with the same reason you have now", "Pray against them", "Ignore them completely"], "answer": 1, "why": "The reason you use today will be there when they come." },
+      { "q": "The art of living is more like a wrestler's than a…", "options": ["soldier's", "dancer's", "sailor's", "poet's"], "answer": 1, "why": "Life means standing firm against unexpected blows." },
+      { "q": "What did Epicurus say about pain?", "options": ["It is the greatest evil", "It is neither intolerable nor eternal", "It purifies the soul", "It is an illusion"], "answer": 1, "why": "Pain that is severe is short. Pain that lasts is bearable." },
+      { "q": "'He is a better wrestler than I.' What should you ask instead?", "options": ["Is he richer?", "Is he more modest, kinder or more patient?", "Is he younger?", "Is he more famous?"], "answer": 1, "why": "Compete in virtue, not in strength." }
+    ],
+    [
+      { "q": "Before every action, what question should you ask?", "options": ["Will people praise me?", "How will this affect me, and will I regret it?", "Is it profitable?", "Is it legal?"], "answer": 1, "why": "'How will this suit me? Shall I not repent of it?'" },
+      { "q": "No time to read? What can you still do?", "options": ["Nothing", "Check your pride, rise above pleasure and pain, and not be angry", "Hire a reader", "Read at night"], "answer": 1, "why": "Practising virtue never needs spare time." },
+      { "q": "The bitter cucumber teaches you to…", "options": ["Complain to the gardener", "Set it away and move on without asking why it exists", "Eat it anyway", "Plant something else"], "answer": 1, "why": "'Is the cucumber bitter? set it away… Let this suffice.'" },
+      { "q": "The mind free from passion is compared to what?", "options": ["A garden", "A fortress or citadel", "A river", "A lamp"], "answer": 1, "why": "A mind free of passion is an unconquerable stronghold." },
+      { "q": "A man who cuts himself off from the whole is like what?", "options": ["A lone wolf", "A hand or foot severed from the body", "A ship without a sail", "A falling star"], "answer": 1, "why": "He makes himself a severed limb, though he may still rejoin." }
+    ],
+    [
+      { "q": "Book Nine opens by saying the unjust man is also…", "options": ["Foolish", "Impious", "Unlucky", "Poor"], "answer": 1, "why": "Nature made us for one another, so injustice offends against nature itself." },
+      { "q": "'This day I did come out of all my trouble.' What correction follows?", "options": ["I never had trouble", "I cast it out: it was never outside, but in my own opinions", "Trouble will return tomorrow", "The gods saved me"], "answer": 1, "why": "Trouble lived in his judgements, so he threw it out." },
+      { "q": "What is 'loss', really?", "options": ["Punishment", "Change", "Bad luck", "Theft"], "answer": 1, "why": "'Loss and corruption is in very deed nothing else but change and alteration.'" },
+      { "q": "When someone's shamelessness offends you, what should you ask?", "options": ["How can I punish him?", "Can there be a world without shameless men?", "Why me?", "Who else saw it?"], "answer": 1, "why": "Such people must exist. Don't demand the impossible." },
+      { "q": "In sickness, what did Epicurus talk about?", "options": ["His symptoms", "Philosophy, not his illness", "His will", "His doctors"], "answer": 1, "why": "He kept his mind on philosophy instead of his disease." }
+    ],
+    [
+      { "q": "Book Ten opens by addressing whom?", "options": ["The Senate", "His son", "His own soul", "The gods"], "answer": 2, "why": "'O my soul, the time I trust will be, when thou shalt be good, simple…'" },
+      { "q": "What names should you take on and keep?", "options": ["Caesar, Augustus", "Good, modest, true, prudent, equanimous", "Brave, strong, rich", "Wise, famous, loved"], "answer": 1, "why": "Live up to these names, and don't trade them away." },
+      { "q": "The spider proud of catching a fly is compared to whom?", "options": ["A hunter", "A conqueror proud of capturing men", "A merchant", "A philosopher"], "answer": 1, "why": "Proud conquerors are spiders bragging about flies." },
+      { "q": "Whoever grieves over worldly things is like what?", "options": ["A crying child", "A pig squealing as it is slaughtered", "A broken lyre", "A sinking ship"], "answer": 1, "why": "Complaining doesn't change what happens. Only the reasoning creature can accept it freely." },
+      { "q": "True or false: Even the best man will have someone glad to see him die.", "options": ["True", "False"], "answer": 0, "why": "No man is so happy in his death that no one rejoices at it. So go gently." }
+    ],
+    [
+      { "q": "What is a branch cut off from its neighbour also cut off from?", "options": ["Its roots", "The whole tree", "Sunlight", "Nothing"], "answer": 1, "why": "Breaking with one person cuts you off from the whole community." },
+      { "q": "Book Eleven gives how many 'remedies' for anger?", "options": ["Three", "Five", "Nine", "Twelve"], "answer": 2, "why": "'These nine particular heads, as so many gifts from the Muses…'" },
+      { "q": "What did the Pythagoreans do first thing in the morning?", "options": ["Bathed in cold water", "Looked up at the heavens", "Ran a mile", "Read aloud"], "answer": 1, "why": "They looked at the stars, which always keep their order, purity and simplicity." },
+      { "q": "Which fable does Marcus mention?", "options": ["The tortoise and the hare", "The country mouse and the city mouse", "The fox and the grapes", "The ant and the grasshopper"], "answer": 1, "why": "He uses it to show how anxiety comes with ambition." },
+      { "q": "'Will any contemn me?' What is Marcus's answer?", "options": ["Contemn them back", "Let them look to that; I will look to doing nothing worthy of it", "Avoid them", "Ask why"], "answer": 1, "why": "Their contempt is their business. Your conduct is yours." }
+    ],
+    [
+      { "q": "Book Twelve says you can have what you aspire to when?", "options": ["After death", "Now, if you forget the past and turn to the present", "When you are old", "Never"], "answer": 1, "why": "'Whatsoever thou doest hereafter aspire unto, thou mayest even now enjoy.'" },
+      { "q": "Marcus wonders why each person loves himself best, yet values what?", "options": ["Money over love", "Others' opinion of him more than his own", "Fame over life", "Wine over water"], "answer": 1, "why": "We love ourselves most, yet care more about what others think of us." },
+      { "q": "Complete the line: 'Cast away from thee ___, and thou art safe.'", "options": ["fear", "opinion", "wealth", "anger"], "answer": 1, "why": "Cast away opinion and you come safely into harbour." },
+      { "q": "What image shows that there is one common soul?", "options": ["One river", "One light of the sun, though walls break it up", "One tree", "One ocean"], "answer": 1, "why": "Many walls divide the sunlight, but there is only one sun." },
+      { "q": "If your life ends early, what does Marcus say about the play?", "options": ["It was a tragedy", "Three acts can be the whole play", "The play never ends", "You must demand an encore"], "answer": 1, "why": "Leave the stage well pleased, for the one who dismisses you is also pleased." }
+    ]
+  ]
+}
