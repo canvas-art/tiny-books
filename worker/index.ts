@@ -3,11 +3,12 @@ import type {
   Activity, BookDetail, BookSummary, ChapterView, CompleteResult, GroupDetail, GroupSummary, League, Me,
   MicroDetail, MicroStatus, NextStep, QuizCheck, QuizSubmitResult, QuizView, RankRow, Stats, User,
 } from "../shared/types";
+import { accessStatus, baseProtection, grantAccess, readBody, requireAccess, validId, type SecurityBindings } from "./security";
 
-type Env = { DB: D1Database };
+type Env = SecurityBindings & { DB: D1Database };
 type C = { Bindings: Env };
 
-// MVP: no auth. Everyone is John Doe.
+// MVP: no user accounts. Everyone who has the access code is John Doe.
 const ME = 1;
 const DAILY_GOAL = 1;
 const XP_MICRO = 10;
@@ -15,8 +16,18 @@ const XP_DAILY_BONUS = 5;
 const XP_PER_CORRECT = 5;
 const XP_PERFECT = 15;
 const PASS_MARK = 3;
+// Caps that keep the shared database from being filled up.
+const MAX_GROUPS = 25;
+const MAX_INVITES_PER_GROUP = 50;
+const MAX_DESCRIPTION = 280;
+const MAX_EMAIL = 254;
 
 const app = new Hono<C>().basePath("/api");
+
+app.use("*", ...baseProtection);
+app.get("/access", accessStatus);
+app.post("/access", grantAccess);
+app.use("*", requireAccess);
 
 // ---------------------------------------------------------------- helpers
 
@@ -211,6 +222,7 @@ app.post("/books/:slug/start", async (c) => {
 });
 
 async function microAccess(db: D1Database, microId: number) {
+  if (!validId(microId)) return { error: "Micro-chapter not found", code: 404 as const };
   const m = await db.prepare(`SELECT * FROM micro_chapters WHERE id=?`).bind(microId).first<{
     id: number; book_id: number; chapter_id: number; position: number; seq: number; title: string; sections: string; words: number; minutes: number; content: string;
   }>();
@@ -257,6 +269,7 @@ app.post("/micro/:id/complete", async (c) => {
 });
 
 async function quizAccess(db: D1Database, chapterId: number) {
+  if (!validId(chapterId)) return { error: "Chapter not found", code: 404 as const };
   const ch = await db.prepare(`SELECT c.id, c.position, c.title, c.book_id, b.slug, b.title book_title FROM chapters c JOIN books b ON b.id=c.book_id WHERE c.id=?`)
     .bind(chapterId).first<{ id: number; position: number; title: string; book_id: number; slug: string; book_title: string }>();
   if (!ch) return { error: "Chapter not found", code: 404 as const };
@@ -288,7 +301,8 @@ app.post("/quiz/:chapterId/check", async (c) => {
   const db = c.env.DB;
   const a = await quizAccess(db, Number(c.req.param("chapterId")));
   if ("error" in a) return c.json({ error: a.error }, a.code);
-  const body = await c.req.json<{ questionId: number; choice: number }>();
+  const body = await readBody<{ questionId: number; choice: number }>(c);
+  if (!validId(body.questionId)) return c.json({ error: "Question not found" }, 404);
   const q = await db.prepare(`SELECT answer, explanation FROM quiz_questions WHERE id=? AND chapter_id=?`).bind(body.questionId, a.ch.id)
     .first<{ answer: number; explanation: string | null }>();
   if (!q) return c.json({ error: "Question not found" }, 404);
@@ -299,7 +313,7 @@ app.post("/quiz/:chapterId/submit", async (c) => {
   const db = c.env.DB;
   const a = await quizAccess(db, Number(c.req.param("chapterId")));
   if ("error" in a) return c.json({ error: a.error }, a.code);
-  const { answers } = await c.req.json<{ answers: Record<string, number> }>();
+  const { answers } = await readBody<{ answers: Record<string, number> }>(c);
   const { results } = await db.prepare(`SELECT id, answer FROM quiz_questions WHERE chapter_id=?`).bind(a.ch.id).all<{ id: number; answer: number }>();
   const score = results.filter((q) => answers?.[q.id] === q.answer).length;
   const total = results.length;
@@ -365,6 +379,7 @@ app.get("/groups", async (c) => {
 app.get("/groups/:id", async (c) => {
   const db = c.env.DB;
   const id = Number(c.req.param("id"));
+  if (!validId(id)) return c.json({ error: "Group not found" }, 404);
   const isMember = await db.prepare(`SELECT 1 FROM group_members WHERE group_id=? AND user_id=?`).bind(id, ME).first();
   if (!isMember) return c.json({ error: "Group not found" }, 404);
   const [g] = await groupSummaries(db, `g.id=?`, id);
@@ -398,16 +413,20 @@ app.get("/groups/:id", async (c) => {
 
 app.post("/groups", async (c) => {
   const db = c.env.DB;
-  const body = await c.req.json<{ name?: string; description?: string; book?: string }>();
-  const name = body.name?.trim();
+  const body = await readBody<{ name: string; description: string; book: string }>(c);
+  const name = typeof body.name === "string" ? body.name.trim() : "";
   if (!name || name.length > 60) return c.json({ error: "Give your group a name (up to 60 characters)" }, 400);
-  const book = await getBook(db, body.book ?? "meditations");
+  const description = typeof body.description === "string" ? body.description.trim() : "";
+  if (description.length > MAX_DESCRIPTION) return c.json({ error: `Keep the description under ${MAX_DESCRIPTION} characters` }, 400);
+  const book = await getBook(db, typeof body.book === "string" ? body.book : "meditations");
   if (!book) return c.json({ error: "Book not found" }, 404);
+  const owned = await db.prepare(`SELECT COUNT(*) n FROM groups WHERE owner_id=?`).bind(ME).first<{ n: number }>();
+  if (owned!.n >= MAX_GROUPS) return c.json({ error: "You've reached the limit of groups" }, 403);
   const colors = ["#0f766e", "#c2410c", "#7c3aed", "#1d4ed8", "#be123c", "#4d7c0f"];
   const code = `${name.replace(/[^a-z]/gi, "").slice(0, 4).toUpperCase().padEnd(4, "X")}-${crypto.randomUUID().slice(0, 4).toUpperCase()}`;
   const g = await db.prepare(
     `INSERT INTO groups (name, description, book_id, owner_id, color, invite_code) VALUES (?, ?, ?, ?, ?, ?) RETURNING id`,
-  ).bind(name, body.description?.trim() || null, book.id, ME, colors[Math.floor(Math.random() * colors.length)], code).first<{ id: number }>();
+  ).bind(name, description || null, book.id, ME, colors[Math.floor(Math.random() * colors.length)], code).first<{ id: number }>();
   await db.batch([
     db.prepare(`INSERT INTO group_members (group_id, user_id, role) VALUES (?, ?, 'owner')`).bind(g!.id, ME),
     db.prepare(`INSERT OR IGNORE INTO enrollments (user_id, book_id, cohort_id) VALUES (?, ?, ?)`).bind(ME, book.id, await assignCohort(db, book.id)),
@@ -418,11 +437,14 @@ app.post("/groups", async (c) => {
 app.post("/groups/:id/invite", async (c) => {
   const db = c.env.DB;
   const id = Number(c.req.param("id"));
+  if (!validId(id)) return c.json({ error: "Group not found" }, 404);
   const isMember = await db.prepare(`SELECT 1 FROM group_members WHERE group_id=? AND user_id=?`).bind(id, ME).first();
   if (!isMember) return c.json({ error: "Group not found" }, 404);
-  const { email } = await c.req.json<{ email?: string }>();
-  const e = email?.trim().toLowerCase();
-  if (!e || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(e)) return c.json({ error: "That doesn't look like an email address" }, 400);
+  const { email } = await readBody<{ email: string }>(c);
+  const e = typeof email === "string" ? email.trim().toLowerCase() : "";
+  if (!e || e.length > MAX_EMAIL || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(e)) return c.json({ error: "That doesn't look like an email address" }, 400);
+  const invited = await db.prepare(`SELECT COUNT(*) n FROM group_invites WHERE group_id=?`).bind(id).first<{ n: number }>();
+  if (invited!.n >= MAX_INVITES_PER_GROUP) return c.json({ error: "This group has reached the limit of invites" }, 403);
   // Mocked: no email is actually sent. The invite is just recorded as pending.
   await db.prepare(`INSERT INTO group_invites (group_id, email, invited_by) VALUES (?, ?, ?)`).bind(id, e, ME).run();
   return c.json({ ok: true });
@@ -430,8 +452,8 @@ app.post("/groups/:id/invite", async (c) => {
 
 app.post("/groups/join", async (c) => {
   const db = c.env.DB;
-  const { code } = await c.req.json<{ code?: string }>();
-  const g = await db.prepare(`SELECT id, book_id FROM groups WHERE invite_code=?`).bind((code ?? "").trim().toUpperCase()).first<{ id: number; book_id: number }>();
+  const { code } = await readBody<{ code: string }>(c);
+  const g = await db.prepare(`SELECT id, book_id FROM groups WHERE invite_code=?`).bind((typeof code === "string" ? code : "").trim().toUpperCase()).first<{ id: number; book_id: number }>();
   if (!g) return c.json({ error: "No group uses that invite code" }, 404);
   await db.batch([
     db.prepare(`INSERT OR IGNORE INTO group_members (group_id, user_id) VALUES (?, ?)`).bind(g.id, ME),

@@ -25,8 +25,22 @@ Before starting, it applies any pending migrations: the schema, the book and the
 ```sh
 npx wrangler d1 create tiny-books        # paste the database_id into wrangler.jsonc
 pnpm db:migrate:remote
-pnpm deploy
+pnpm run deploy
 ```
+
+Pushes to `main` also deploy automatically through Cloudflare Workers Builds, which applies pending migrations first.
+
+## Access and security
+
+The app has no user accounts yet, so every visitor shares one user. A shared access code keeps strangers out, and every `/api` route except the code check requires it.
+
+```sh
+npx wrangler secret put ACCESS_CODE                      # set or change the code
+echo 'ACCESS_CODE=local-dev-code' > .dev.vars            # local dev (git-ignored)
+```
+
+Share `https://<your-app>/?code=<code>` to skip the prompt. Changing the code signs everyone out.
+The API also has per-IP rate limits (see `wrangler.jsonc`), rejects writes from other origins, caps request sizes, and validates input.
 
 ## What's real and what's mocked
 
