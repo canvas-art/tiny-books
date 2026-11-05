@@ -1,8 +1,8 @@
 import { useCallback, useEffect, useState } from "react";
+import { ApiError } from "./http";
+import { localApi } from "./local/engine";
 
-export class ApiError extends Error {
-  constructor(message: string, public status: number) { super(message); }
-}
+export { ApiError };
 
 // Last good response per GET path. Lets screens render instantly when you come back to them,
 // while a fresh copy loads in the background (stale-while-revalidate).
@@ -11,13 +11,7 @@ const inflight = new Map<string, Promise<unknown>>();
 
 export async function api<T>(path: string, init?: { method?: string; body?: unknown }): Promise<T> {
   const method = init?.method ?? (init?.body ? "POST" : "GET");
-  const res = await fetch(`/api${path}`, {
-    method,
-    headers: init?.body ? { "content-type": "application/json" } : undefined,
-    body: init?.body ? JSON.stringify(init.body) : undefined,
-  });
-  const data = await res.json().catch(() => ({}));
-  if (!res.ok) throw new ApiError((data as { error?: string }).error ?? `Request failed (${res.status})`, res.status);
+  const data = await localApi(method, path, init?.body as Record<string, unknown> | undefined);
   if (method === "GET") cache.set(path, data);
   // A write (finishing a chapter, a quiz, a new group…) makes cached screens stale: refresh them quietly.
   else for (const key of cache.keys()) void prefetch(key);

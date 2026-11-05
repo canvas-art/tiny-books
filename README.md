@@ -6,7 +6,8 @@ This MVP ships one book, *Meditations* by Marcus Aurelius (Project Gutenberg #26
 One Cloudflare Worker serves everything:
 
 - **Frontend**: React 19 + Vite (`src/`), mobile-first, served as static assets
-- **Backend**: Hono API at `/api/*` (`worker/index.ts`)
+- **Backend**: read-only Hono API at `/api/*` (`worker/index.ts`)
+- **Progress**: stored in each visitor's browser (`src/local/engine.ts`)
 - **Database**: Cloudflare D1 (`migrations/`)
 
 ## Run locally
@@ -32,7 +33,9 @@ Pushes to `main` also deploy automatically through Cloudflare Workers Builds, wh
 
 ## Access and security
 
-The app has no user accounts yet, so every visitor shares one user. A shared access code keeps strangers out, and every `/api` route except the code check requires it.
+The app has no user accounts yet, so clients can't change the database: the API only runs `SELECT` queries and rejects other methods.
+Everything a visitor does, including reading progress, quizzes, XP and groups, is saved in their own browser's `localStorage`. It stays private to that browser and is lost if they clear its data.
+A shared access code keeps strangers out, and every `/api` route except the code check requires it.
 
 ```sh
 npx wrangler secret put ACCESS_CODE                      # set or change the code
@@ -40,11 +43,11 @@ echo 'ACCESS_CODE=local-dev-code' > .dev.vars            # local dev (git-ignore
 ```
 
 Share `https://<your-app>/?code=<code>` to skip the prompt. Changing the code signs everyone out.
-The API also has per-IP rate limits (see `wrangler.jsonc`), rejects writes from other origins, caps request sizes, and validates input.
+The API also has per-IP rate limits (see `wrangler.jsonc`), caps request sizes, and validates input.
 
 ## What's real and what's mocked
 
-- **Real**: the book text, the micro-chapter split, the quizzes, XP, streaks, daily goal, locked/unlocked progression, cohort leagues, group creation, and group rankings. All of it is stored in D1.
+- **Real**: the book text, the micro-chapter split, the quizzes, XP, streaks, daily goal, locked/unlocked progression, cohort leagues, group creation, and group rankings. The book, quizzes and mock readers are stored in D1. Your own progress and groups are stored in your browser, starting from John Doe's seeded data.
 - **Mocked**: auth (you are always John Doe, user 1), the other 25 readers and their progress, and invite emails (they are recorded but not sent). Profile → *Reset my progress* lets you start the book from scratch.
 
 ## Rules

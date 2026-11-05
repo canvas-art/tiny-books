@@ -1,5 +1,5 @@
 import { useEffect, useState, type FormEvent, type ReactNode } from "react";
-import { api, ApiError } from "../api";
+import { ApiError, request } from "../http";
 import { Loading } from "./ui";
 
 // A shareable link can carry the code (/?code=...). Read it once, then take it out of the address bar.
@@ -11,7 +11,7 @@ if (codeFromUrl) {
   history.replaceState(null, "", location.pathname + (query ? `?${query}` : "") + location.hash);
 }
 
-const unlock = (code: string) => api<{ granted: boolean }>("/access", { body: { code } });
+const unlock = (code: string) => request<{ granted: boolean }>("/access", { code });
 
 /** Holds the app back until the visitor has entered the access code, so nothing calls the API before then. */
 export function AccessGate({ children }: { children: ReactNode }) {
@@ -27,7 +27,7 @@ export function AccessGate({ children }: { children: ReactNode }) {
 
   useEffect(() => {
     if (codeFromUrl) unlock(codeFromUrl).then(() => setGranted(true)).catch(fail);
-    else api<{ granted: boolean }>("/access").then((r) => setGranted(r.granted)).catch(() => setGranted(false));
+    else request<{ granted: boolean }>("/access").then((r) => setGranted(r.granted)).catch(() => setGranted(false));
   }, []);
 
   const submit = async (e: FormEvent) => {

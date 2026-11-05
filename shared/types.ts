@@ -46,6 +46,25 @@ export type BookSummary = {
   completed: number;
 };
 
+/** A row of the books table: a BookSummary without the computed fields. */
+export type BookRow = Omit<BookSummary, "totalMicros" | "totalChapters" | "totalMinutes" | "readers" | "enrolled" | "completed">;
+
+/** The read-only data the Worker sends the browser. See src/local/engine.ts. */
+export type Snapshot = {
+  books: BookRow[];
+  chapters: { id: number; book_id: number; position: number; title: string; theme: string | null; footer: string | null }[];
+  micros: { id: number; book_id: number; chapter_id: number; position: number; seq: number; title: string; sections: string; words: number; minutes: number }[];
+  questions: { id: number; chapter_id: number; position: number; question: string; options: string; answer: number; explanation: string | null }[];
+  users: User[];
+  cohorts: { id: number; book_id: number; name: string; started_at: string }[];
+  enrollments: { user_id: number; book_id: number; cohort_id: number | null; started_at: string }[];
+  completions: { user_id: number; micro_id: number; xp: number; completed_at: string }[];
+  quizResults: { user_id: number; chapter_id: number; score: number; total: number; passed: number; xp: number; completed_at: string }[];
+  groups: { id: number; name: string; description: string | null; book_id: number; owner_id: number; color: string; invite_code: string; created_at: string }[];
+  members: { group_id: number; user_id: number; role: string; joined_at: string }[];
+  invites: { group_id: number; email: string; status: string; created_at: string }[];
+};
+
 export type MicroStatus = "done" | "current" | "locked";
 
 export type ChapterView = {
