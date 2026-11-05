@@ -1,6 +1,6 @@
 import { Hono } from "hono";
 import type { Snapshot } from "../shared/types";
-import { accessStatus, baseProtection, grantAccess, requireAccess, validId, type SecurityBindings } from "./security";
+import { baseProtection, validId, type SecurityBindings } from "./security";
 
 type Env = SecurityBindings & { DB: D1Database };
 type C = { Bindings: Env };
@@ -10,10 +10,7 @@ type C = { Bindings: Env };
 const app = new Hono<C>().basePath("/api");
 
 app.use("*", ...baseProtection);
-app.get("/access", accessStatus);
-app.post("/access", grantAccess);
 app.on(["POST", "PUT", "PATCH", "DELETE"], "*", (c) => c.json({ error: "This API is read-only" }, 405));
-app.use("*", requireAccess);
 
 const SNAPSHOT_QUERIES = [
   `SELECT * FROM books ORDER BY title`,

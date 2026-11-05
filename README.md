@@ -29,21 +29,14 @@ pnpm db:migrate:remote
 pnpm run deploy
 ```
 
-Pushes to `main` also deploy automatically through Cloudflare Workers Builds, which applies pending migrations first.
+Deploys are manual: pushing to `main` doesn't deploy anything.
 
-## Access and security
+## Security
 
 The app has no user accounts yet, so clients can't change the database: the API only runs `SELECT` queries and rejects other methods.
 Everything a visitor does, including reading progress, quizzes, XP and groups, is saved in their own browser's `localStorage`. It stays private to that browser and is lost if they clear its data.
-A shared access code keeps strangers out, and every `/api` route except the code check requires it.
-
-```sh
-npx wrangler secret put ACCESS_CODE                      # set or change the code
-echo 'ACCESS_CODE=local-dev-code' > .dev.vars            # local dev (git-ignored)
-```
-
-Share `https://<your-app>/?code=<code>` to skip the prompt. Changing the code signs everyone out.
-The API also has per-IP rate limits (see `wrangler.jsonc`), caps request sizes, and validates input.
+The app is open to anyone, so don't put anything private in the database: `/api/snapshot` returns its tables to every visitor.
+The API also has a per-IP rate limit (see `wrangler.jsonc`) and validates input.
 
 ## What's real and what's mocked
 

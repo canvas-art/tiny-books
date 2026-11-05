@@ -19,11 +19,9 @@
 			"remote": false
 		}
 	],
-	// Per-IP limits. namespace_id only has to be a unique number within the account.
+	// Per-IP limit. namespace_id only has to be a unique number within the account.
 	"ratelimits": [
-		{ "name": "RATE_READ", "namespace_id": "1001", "simple": { "limit": 300, "period": 60 } },
-		{ "name": "RATE_WRITE", "namespace_id": "1002", "simple": { "limit": 40, "period": 60 } },
-		{ "name": "RATE_ACCESS", "namespace_id": "1003", "simple": { "limit": 10, "period": 60 } }
+		{ "name": "RATE_LIMIT", "namespace_id": "1001", "simple": { "limit": 300, "period": 60 } }
 	],
 	"observability": {
 		"enabled": true
