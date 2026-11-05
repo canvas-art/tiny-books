@@ -1,0 +1,14 @@
+/* Roman road theme. Everything is scoped to the theme: its CSS stays loaded after you switch away. */
+
+[data-path-theme="roman"] .rm-tablet { position: relative; height: 88px; }
+[data-path-theme="roman"] .rm-tablet svg { display: block; filter: drop-shadow(0 6px 10px rgb(60 45 20 / .10)); }
+[data-path-theme="roman"] .rm-tablet-text {
+  position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center;
+  text-align: center; padding: 0 52px;
+}
+[data-path-theme="roman"] .rm-tablet-text small {
+  font: 700 10px/1 "Cinzel", serif; letter-spacing: .32em; color: #a8841a; margin-bottom: 6px; padding-left: .32em;
+}
+[data-path-theme="roman"] .rm-tablet-text strong { font: 700 14.5px/1.15 "Cinzel", serif; letter-spacing: .04em; color: #4f483e; }
+[data-path-theme="roman"] .rm-tablet.is-locked small,
+[data-path-theme="roman"] .rm-tablet.is-locked strong { color: #a9afb8; }
